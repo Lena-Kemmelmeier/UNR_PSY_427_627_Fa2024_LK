@@ -27,7 +27,7 @@ textColor = [255, 255, 255, 255]; % White
 textToShow = 'Hello world!';
 
 Screen('DrawText', w, textToShow, textPosition(1), textPosition(2), textColor);
-Screen('Flip', w);
+flip_time = Screen('Flip', w);
 WaitSecs(1);
 
 %% Draw a dot
