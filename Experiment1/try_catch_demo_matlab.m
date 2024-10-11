@@ -30,7 +30,7 @@ try
     my_str = 'Press left or right arrow or q!';
     textPosition = screenSize / 2; % the middle of the screen
     textColor = [255, 255, 255, 255]; % White
-    Screen('DrawText', win, my_strr, textPosition(1), textPosition(2), textColor);
+    Screen('DrawText', win, my_str, textPosition(1), textPosition(2), textColor);
     t0 = Screen('Flip', win);
     
     
