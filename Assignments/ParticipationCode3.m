@@ -5,6 +5,8 @@
     Assignment: Participation Code #3
 %}
 
+% Fix error with quitting
+
 %% Prepare Environment
 clear; clc; close all;
 rng('shuffle');
