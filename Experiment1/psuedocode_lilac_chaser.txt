@@ -1,0 +1,53 @@
+
+# Questions:
+What to draw? 
+When to flip? 
+Where are loops? 
+What kind of loops? 
+What variables? structured how? 
+
+# PseudoCode
+
+Option A:  for loop
+
+Create a window (gray, approximately square)
+Create a fixation dot or parameters for a fixation dot
+set a variable blob_to_disappear  = 1
+specify n_cycles 
+specify disappearance time (how long each dot is absent)
+Describe 12, or n, locations, sizes, and colors of dots (aka blobs) around a circle
+
+for cycle in n_cycles:
+	for dot to disappear in (12 dots)
+		for dot index in 12 dots :
+			if not dot to disappear
+				draw dot (dot index)
+			else 
+				don't  draw dot
+		 draw fixation
+		 flip screen
+		 wait disappearance time
+	
+Option B: while loop
+
+specify n_seconds 
+Create (n) dots (aka blobs) (size, color, location)
+Save as a list or cell array
+specify disappearance time (how long each dot is absent)
+get start time
+Describe 12, or n, locations, sizes, and colors of blobs around a circle
+while (get clock time) < (start time + n_seconds)
+	for this_dot in n dots :
+		if not dot to disappear == this_dot
+			draw dot 
+		else 
+			don't  draw dot
+	 increment dot to disappear (+1)
+	 draw fixation 
+	 flip screen
+	 wait disappearance time
+	 if blob to disappear is > 12
+		 Reset dot to disappear to 0 or 1 (python or matlab)
+		 (Use mod function in matlab or % operator )
+	
+	
