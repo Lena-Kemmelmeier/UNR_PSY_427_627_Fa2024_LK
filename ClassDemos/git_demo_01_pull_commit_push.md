@@ -1,7 +1,7 @@
 # Git demo 1: clone, pull, add/commit, push
 This is a demo of basic git functionality. 
 
-1. To assure that everyone is starting with a clean repo, please FORK the following repo to your peronal git repository:
+1. To assure that everyone is starting with a clean repo, please FORK the following repo to your personal git repository:
 
 http://github.com/piecesofmindlab/teaching_git
 
