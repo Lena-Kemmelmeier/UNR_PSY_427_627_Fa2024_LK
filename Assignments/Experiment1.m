@@ -127,7 +127,7 @@ try
     WaitSecs(.2 - flipAdjustment); 
 
 % loop over trials
-for i = 1:nTrials
+for i = 1:nTrials % 5 for debugging
 
     % reset variables at the start of each trial
     keyPressed = ''; 
@@ -166,27 +166,30 @@ for i = 1:nTrials
 
     % monitor for keypresses but do not stop the display if a response is recorded
     endTime = timeImageOnset + imageDur - flipAdjustment;
-    while GetSecs() < endTime
+    [responseRecorded, keyPressed, responseTime] = getKeyPress(endTime, specialKey, quitKey);
+    
 
-        % check for quit key and exit if pressed
-        if checkForQuit(quitKey)
-            endExperiment();
-            return;
-        end
-
-        % only check for keypresses if a response hasn't been recorded yet
-        if ~responseRecorded
-            [keyDown, potentialResponseTime, keyCode] = KbCheck;
-
-            % check if a key was pressed and it matches the special key
-            if keyDown && keyCode(specialKey)
-                keyPressed = KbName(find(keyCode)); % directly get the name of the pressed key
-                responseTime = potentialResponseTime; % set actual response time
-                responseRecorded = 1; % ensure no further keypresses are recorded
-                KbReleaseWait; % ensure key is released before continuing
-            end
-        end
-    end
+    % while GetSecs() < endTime
+    % 
+    %     % check for quit key and exit if pressed
+    %     if checkForQuit(quitKey)
+    %         endExperiment();
+    %         return;
+    %     end
+    % 
+    %     % only check for keypresses if a response hasn't been recorded yet
+    %     if ~responseRecorded
+    %         [keyDown, potentialResponseTime, keyCode] = KbCheck;
+    % 
+    %         % check if a key was pressed and it matches the special key
+    %         if keyDown && keyCode(specialKey)
+    %             keyPressed = KbName(find(keyCode)); % directly get the name of the pressed key
+    %             responseTime = potentialResponseTime; % set actual response time
+    %             responseRecorded = 1; % ensure no further keypresses are recorded
+    %             KbReleaseWait; % ensure key is released before continuing
+    %         end
+    %     end
+    % end
 
     % determine the fixation color based on key press and trial type
     if (responseRecorded && isHitTrial) % hit = green
@@ -267,4 +270,35 @@ function endExperiment()
     ShowCursor; % restore the mouse cursor
     ListenChar(0); % restore keyboard control to MATLAB
     Priority(0); % reset any changes made to system priority
+end
+
+% helper function: get key press
+function [responseRecorded, keyPressed, responseTime] = getKeyPress(deadline, desiredKey, quitKey)
+
+    if ~exist('responseRecorded','var')
+        responseRecorded = 0;
+    end
+    
+    while GetSecs() < deadline
+
+        % check for quit key and exit if pressed
+        if checkForQuit(quitKey)
+            endExperiment();
+            return;
+        end
+
+        % only check for keypresses if a response hasn't been recorded yet
+        if ~responseRecorded
+            [keyDown, potentialResponseTime, keyCode] = KbCheck;
+
+            % check if a key was pressed and it matches the special key
+            if keyDown && desiredKey
+                keyPressed = KbName(find(keyCode)); % directly get the name of the pressed key
+                responseTime = potentialResponseTime; % set actual response time
+                responseRecorded = 1; % ensure no further keypresses are recorded
+                KbReleaseWait; % ensure key is released before continuing
+            end
+        end
+    end
+
 end
