@@ -24,4 +24,4 @@ You will get a menu like this:
 
 I recommend you keep the name the same. 
 
-Once you have your own repository, please clone it 
+Once you have your own repository, please clone it. 
